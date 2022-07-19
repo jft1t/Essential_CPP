@@ -1,0 +1,76 @@
+01  什么是class
+    用户自定义的数据类型 (user-defined data type)，增强类型抽象化的层次
+    class定义应该分为两部分
+    (1) 头文件 (header file) -- 用来声明class的各类操作行为
+    (2) 代码文件 (program text) -- 包含了操作行为的具体实现
+
+02  对象初始化方式
+    (1) 使用 = 运算符，如 int num_tries = 0;
+        源自C语言
+    (2) 构造函数语法，如 int num_tries(0);
+        解决多值初始化问题
+        使内置类型与 class 类型的初始化方式得到统一
+    
+    当初始化单值对象时，使用 (1), (2) 方法都是可以的，如初始化一个 int 型变量
+    但初始化多值对象时，只能使用 (2) 方法，如初始化复数类型变量 complex<double> purei(0, 7);
+
+03  运算符优先级
+    逻辑运算符 NOT ！
+    算术运算符 *，/，%
+    算术运算符 +，-
+    关系运算符 >, <, >=, <=
+    关系运算符 ==，！=
+    逻辑运算符 AND &&
+    逻辑运算符 OR ||
+    赋值运算符 =
+
+04 vector容器
+    (1) 声明
+        vector<type> name(size)；
+    (2) 初始化
+        <1> 挨个赋值
+        如, elem_seq[1] = 1;
+            elem_seq[2] = 2;
+            ...
+        <2> 利用已初始化的 array 作为该 vector 的初值
+        如, int elem_vals[seq_size] = {
+            1,2,...
+            }
+            vector<int> elem_seq(elem_vals, elem_vals + seq_size);
+    (3) 赋值
+        尾插 vec.push_back(val);
+    (4)遍历
+        <1> 下标
+            for (int i = 0; i<vec.size(); ++i) {
+		        cout << vec[i].x << "	" << vec[i].y << endl;
+	        }
+        <2> 迭代器访问
+            for (vector<Point>::iterator iter = vec.begin(); iter != vec.end(); iter++) {
+		        cout << (*iter).x << "	" << (*iter).y << endl;
+	        }
+        <3> auto 关键字
+            for (auto iter = vec.begin(); iter != vec.end(); iter++) {
+		        cout << (*iter).x << "	" << (*iter).y << endl;
+	        }
+
+
+
+        
+05 随机数生成器srand(), rand()
+    位于标准库 <cstdlib>中
+    使用方法：
+        通过 seed 初始化 srand, 后每次调用 rand() 会生成 0~int最大整数 间的一个整数
+        srand(seed);
+        rand();
+    限制随机数范围：
+        rand() % (max-min) + min
+06 文件的读写
+    头文件 <fstream>
+    (1)只读文件、输入
+        ifstream infile(" //文件路径 ");
+    (2)只写文件、输出
+        ofstream outfile(" //文件路径 ");
+    (3)读写文件
+        fstream iofile(" //文件路径 ", 
+                        ios_base::in|ios_base::app);
+                    这里表示以追加模式 (append mode) 打开
